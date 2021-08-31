@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import { Nav, Homepage, ReviewsList } from "./Components";
+import { Nav, Homepage, ReviewsList, ReviewPage } from "./Components";
 import "./App.css";
 
 function App() {
@@ -13,8 +13,13 @@ function App() {
             <Route exact path="/">
               <Homepage />
             </Route>
-            <Route exact path="/reviews">
+            <Route exact path="/reviews/:category?">
               <ReviewsList />
+            </Route>
+            <Route path="/reviews/review/:review_id">
+              <ReviewPage>
+                <p>Review not found!</p>
+              </ReviewPage>
             </Route>
           </Switch>
         </main>

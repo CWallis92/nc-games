@@ -1,12 +1,22 @@
-// import { PropTypes } from "react";
+import { useHistory, Link } from "react-router-dom";
 
 const ReviewBox = ({ review }) => {
+  let history = useHistory();
+
+  const changeCategory = () => {
+    history.push("/reviews/" + review.category);
+  };
+
   return (
     <div className="reviewsList-reviewBox">
       <img src={review.review_img_url} alt={review.title} />
       <div>
-        <p>{review.title}</p>
-        <p className="reviewsList-category">{review.category}</p>
+        <Link to={"/reviews/review/" + review.review_id}>
+          <p>{review.title}</p>
+        </Link>
+        <p className="reviewsList-category" onClick={changeCategory}>
+          {review.category}
+        </p>
         <p>{review.owner}</p>
         <p>{Date(review.created_at).toLocaleString()}</p>
         <p>Votes: {review.votes}</p>

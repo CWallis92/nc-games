@@ -1,5 +1,7 @@
 import * as axios from "axios";
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+
 import { ReviewBox } from "./";
 
 const ReviewsList = () => {
@@ -8,13 +10,19 @@ const ReviewsList = () => {
     timeout: 1000,
   });
 
+  const { category } = useParams();
+
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
     endpoint
-      .get("/reviews")
+      .get("/reviews", {
+        params: {
+          category,
+        },
+      })
       .then((response) => setReviews(response.data.reviews));
-  }, []);
+  }, [category]);
 
   return (
     <section>

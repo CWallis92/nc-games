@@ -34,18 +34,27 @@ main {
   padding: 0 1em;
 }
 
-.reviewsList-reviewBox {
+.reviewsList-reviewBox{
   border: 1px solid gray;
   margin: 1em auto;
   display: flex;
 }
 
-.reviewsList-reviewBox > img {
+.reviewBox {
+  display: flex;
+  margin: 1em auto;
+}
+
+.reviewsList-reviewBox > img, .reviewBox > img {
   max-width: 40%;
 }
 
-.reviewsList-category {
+.reviewsList-category, .reviewCategory {
   border: 1px solid gray;
   border-radius: 8px;
   background: lightgray;
+}
+
+.reviewBody {
+  border: 1px solid gray;
 }
