@@ -23,10 +23,13 @@
 
 #nav-profile {
   margin-left: auto;
+  display: flex;
+  align-items: center;
 }
 
 #nav-profile > img {
   border-radius: 50%;
+  margin-left: 0.5em;
 }
 
 main {

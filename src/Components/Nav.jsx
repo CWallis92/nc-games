@@ -1,7 +1,12 @@
-import logo from "../assets/nc-logo.png";
+import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 
+import { UserContext } from "../contexts/user";
+import logo from "../assets/nc-logo.png";
+
 const Nav = () => {
+  const { user } = useContext(UserContext);
+
   return (
     <nav className="App-nav">
       <NavLink exact to="/" id="nav-logo">
@@ -16,7 +21,7 @@ const Nav = () => {
       >
         Reviews
       </NavLink>
-      <NavLink
+      {/* <NavLink
         exact
         to="/users"
         activeStyle={{
@@ -24,9 +29,10 @@ const Nav = () => {
         }}
       >
         Users
-      </NavLink>
-      <NavLink to="/users/jessjelly" id="nav-profile">
-        <img src={logo} alt="logo" />
+      </NavLink> */}
+      <NavLink to={`/users/${user.username}`} id="nav-profile">
+        <p>{user.username}</p>
+        <img src={user.avatar_url} alt="logo" />
       </NavLink>
     </nav>
   );

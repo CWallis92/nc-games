@@ -1,13 +1,11 @@
 import * as axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router";
 
 import { CommentBox } from ".";
 
-const CommentsList = ({ children }) => {
+const CommentsList = ({ children, comments, setComments }) => {
   const { review_id } = useParams();
-
-  const [comments, setComments] = useState([]);
 
   const endpoint = axios.create({
     baseURL: "https://chris-nc-games.herokuapp.com/api",
@@ -20,13 +18,16 @@ const CommentsList = ({ children }) => {
       .then((response) => setComments(response.data.comments));
   }, []);
 
-  console.log(comments);
-
   return comments.length > 0 ? (
     <div>
-      <h2>Comments</h2>
       {comments.map((comment) => {
-        return <CommentBox comment={comment} />;
+        return (
+          <CommentBox
+            key={comment.comment_id}
+            comment={comment}
+            setComments={setComments}
+          />
+        );
       })}
     </div>
   ) : (

@@ -1,17 +1,13 @@
 import * as axios from "axios";
-import { useEffect, useState } from "react";
-import { useParams, useHistory } from "react-router";
+import { useEffect, useState, useContext } from "react";
+import { useParams } from "react-router";
 
-import { CommentsList } from "./";
+import { ReviewContent, CommentsList, NewCommentForm } from ".";
+import { UserContext } from "../contexts/user";
 
 const ReviewPage = ({ children }) => {
-  let history = useHistory();
-
-  const changeCategory = () => {
-    history.push("/reviews/" + review.category);
-  };
-
   const { review_id } = useParams();
+  const { user } = useContext(UserContext);
 
   const endpoint = axios.create({
     baseURL: "https://chris-nc-games.herokuapp.com/api",
@@ -19,6 +15,7 @@ const ReviewPage = ({ children }) => {
   });
 
   const [review, setReview] = useState(null);
+  const [comments, setComments] = useState([]);
 
   useEffect(() => {
     endpoint
@@ -28,25 +25,12 @@ const ReviewPage = ({ children }) => {
 
   return review ? (
     <section>
-      <div className="reviewBox">
-        <img src={review.review_img_url} alt={review.title} />
-        <div>
-          <p>{review.title}</p>
-          <p>Game designer: {review.designer}</p>
-          <p className="reviewCategory" onClick={changeCategory}>
-            {review.category}
-          </p>
-          <p>{review.owner}</p>
-          <p>{Date(review.created_at).toLocaleString()}</p>
-          <p>Votes: {review.votes}</p>
-        </div>
-      </div>
-      <div className="reviewBody">
-        <p>{review.review_body}</p>
-      </div>
-      <CommentsList>
+      <ReviewContent review={review} setReview={setReview} />
+      <h2>Comments</h2>
+      <CommentsList comments={comments} setComments={setComments}>
         <p>This review has no comments!</p>
       </CommentsList>
+      {user && <NewCommentForm setComments={setComments} />}
     </section>
   ) : (
     children
