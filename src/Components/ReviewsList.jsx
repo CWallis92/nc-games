@@ -2,7 +2,7 @@ import * as axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import { ReviewBox } from "./";
+import { ReviewBox, ReviewsFilter } from "./";
 
 const ReviewsList = () => {
   const endpoint = axios.create({
@@ -26,6 +26,7 @@ const ReviewsList = () => {
 
   return (
     <section>
+      <ReviewsFilter />
       {reviews.map((review) => {
         return <ReviewBox key={review.review_id} review={review} />;
       })}

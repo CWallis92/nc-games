@@ -43,6 +43,12 @@ main {
   display: flex;
 }
 
+#reviewsFilter {
+  background: lightgray;
+  border-radius: 5px;
+  border: 1px solid gray;
+}
+
 .reviewBox {
   display: flex;
   margin: 1em auto;

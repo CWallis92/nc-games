@@ -1,6 +1,7 @@
 import Nav from "./Nav";
 import Homepage from "./Homepage";
 import ReviewsList from "./ReviewsList";
+import ReviewsFilter from "./ReviewsFilter";
 import ReviewBox from "./ReviewBox";
 import ReviewPage from "./ReviewPage";
 import ReviewContent from "./ReviewContent";
@@ -12,6 +13,7 @@ export {
   Nav,
   Homepage,
   ReviewsList,
+  ReviewsFilter,
   ReviewBox,
   ReviewPage,
   ReviewContent,

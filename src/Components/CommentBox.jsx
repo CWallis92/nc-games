@@ -1,5 +1,6 @@
 import * as axios from "axios";
 import { useState, useContext } from "react";
+import { Link } from "react-router-dom";
 import { UserContext } from "../contexts/user";
 
 const CommentBox = ({ comment, setComments }) => {
@@ -37,7 +38,9 @@ const CommentBox = ({ comment, setComments }) => {
         {/* Update the backend to include user avatar at this endpoint */}
         {/* Or use GraphQL? */}
         {/* <img src={XX} alt={comment.author} /> */}
-        <p>{comment.author}</p>
+        <Link to={`/users/${comment.author}`}>
+          <p>{comment.author}</p>
+        </Link>
       </div>
       <p>{comment.body}</p>
       <p>{new Date(comment.created_at).toLocaleString()}</p>
