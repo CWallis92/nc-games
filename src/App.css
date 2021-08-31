@@ -58,3 +58,9 @@ main {
 .reviewBody {
   border: 1px solid gray;
 }
+
+.commentBox {
+  border: 1px solid gray;
+  margin: 1em auto;
+  text-align: left;
+}

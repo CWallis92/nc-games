@@ -2,6 +2,8 @@ import * as axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router";
 
+import { CommentsList } from "./";
+
 const ReviewPage = ({ children }) => {
   let history = useHistory();
 
@@ -19,12 +21,10 @@ const ReviewPage = ({ children }) => {
   const [review, setReview] = useState(null);
 
   useEffect(() => {
-    return endpoint
-      .get("/reviews/" + review_id)
+    endpoint
+      .get(`/reviews/${review_id}`)
       .then((response) => setReview(response.data.review));
   }, []);
-
-  console.log(review);
 
   return review ? (
     <section>
@@ -44,6 +44,9 @@ const ReviewPage = ({ children }) => {
       <div className="reviewBody">
         <p>{review.review_body}</p>
       </div>
+      <CommentsList>
+        <p>This review has no comments!</p>
+      </CommentsList>
     </section>
   ) : (
     children

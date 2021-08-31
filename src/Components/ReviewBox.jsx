@@ -18,7 +18,7 @@ const ReviewBox = ({ review }) => {
           {review.category}
         </p>
         <p>{review.owner}</p>
-        <p>{Date(review.created_at).toLocaleString()}</p>
+        <p>{new Date(review.created_at).toLocaleString()}</p>
         <p>Votes: {review.votes}</p>
         <p>Comments: {review.comment_count}</p>
       </div>
