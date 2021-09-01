@@ -1,6 +1,13 @@
-/* .App {
-  text-align: center;
-} */
+#root {
+  height: 100vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: url(../assets/stacked-waves-haikei.svg);
+}
+
+main {
+  margin: 1em
+}
 
 .App-nav {
   background-color: #282c34;
@@ -30,11 +37,6 @@
 #nav-profile > img {
   border-radius: 50%;
   margin-left: 0.5em;
-}
-
-main {
-  margin-top: 1em;
-  padding: 0 1em;
 }
 
 .reviewsList-reviewBox{

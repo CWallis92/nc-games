@@ -15,6 +15,7 @@ const ReviewsFilter = () => {
       {categories.map((category) => {
         return (
           <button
+            class="button"
             key={category.slug}
             onClick={() => changeCategory(category.slug)}
           >
