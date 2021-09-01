@@ -21,7 +21,7 @@ const Nav = () => {
       >
         Reviews
       </NavLink>
-      {/* <NavLink
+      <NavLink
         exact
         to="/users"
         activeStyle={{
@@ -29,7 +29,7 @@ const Nav = () => {
         }}
       >
         Users
-      </NavLink> */}
+      </NavLink>
       <NavLink to={`/users/${user.username}`} id="nav-profile">
         <p>{user.username}</p>
         <img src={user.avatar_url} alt="logo" />

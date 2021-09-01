@@ -1,6 +1,5 @@
-import * as axios from "axios";
-import { useState, useEffect } from "react";
 import { useHistory } from "react-router";
+import { useCategories } from "../hooks";
 
 const ReviewsFilter = () => {
   let history = useHistory();
@@ -9,18 +8,7 @@ const ReviewsFilter = () => {
     history.push("/reviews/" + (category || ""));
   };
 
-  const [categories, setCategories] = useState([]);
-
-  const endpoint = axios.create({
-    baseURL: "https://chris-nc-games.herokuapp.com/api",
-    timeout: 1000,
-  });
-
-  useEffect(() => {
-    endpoint
-      .get("/categories")
-      .then((response) => setCategories(response.data.categories));
-  }, []);
+  const categories = useCategories();
 
   return (
     <div id="reviewsFilter">

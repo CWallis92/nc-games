@@ -1,30 +1,19 @@
 import { useState, useContext } from "react";
-import * as axios from "axios";
-import { useParams } from "react-router";
 
 import { UserContext } from "../contexts/user";
+import { postComment } from "../utils/api";
 
-const NewCommentForm = ({ setComments }) => {
-  const { review_id } = useParams();
+const NewCommentForm = ({ setComments, review_id }) => {
   const { user } = useContext(UserContext);
 
   const [newComment, setNewComment] = useState();
   const [newCommentError, setNewCommentError] = useState(null);
 
-  const endpoint = axios.create({
-    baseURL: "https://chris-nc-games.herokuapp.com/api",
-    timeout: 1000,
-  });
-
   const updateComments = (event) => {
     event.preventDefault();
     setNewCommentError(null);
 
-    endpoint
-      .post(`/reviews/${review_id}/comments`, {
-        username: user.username,
-        body: newComment,
-      })
+    postComment(review_id, user.username, newComment)
       .then(({ data: { comment } }) => {
         setNewComment("");
         setComments((currComments) => {

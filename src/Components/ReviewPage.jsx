@@ -1,39 +1,31 @@
-import * as axios from "axios";
-import { useEffect, useState, useContext } from "react";
+import { useContext } from "react";
 import { useParams } from "react-router";
 
 import { ReviewContent, CommentsList, NewCommentForm } from ".";
 import { UserContext } from "../contexts/user";
+import { useComments } from "../hooks";
 
-const ReviewPage = ({ children }) => {
+const ReviewPage = () => {
   const { review_id } = useParams();
   const { user } = useContext(UserContext);
 
-  const endpoint = axios.create({
-    baseURL: "https://chris-nc-games.herokuapp.com/api",
-    timeout: 1000,
-  });
+  const { comments, setComments } = useComments(review_id);
 
-  const [review, setReview] = useState(null);
-  const [comments, setComments] = useState([]);
-
-  useEffect(() => {
-    endpoint
-      .get(`/reviews/${review_id}`)
-      .then((response) => setReview(response.data.review));
-  }, []);
-
-  return review ? (
+  return (
     <section>
-      <ReviewContent review={review} setReview={setReview} />
+      <ReviewContent review_id={review_id}>
+        <p>Review not found!</p>
+      </ReviewContent>
+
       <h2>Comments</h2>
+
       <CommentsList comments={comments} setComments={setComments}>
         <p>This review has no comments!</p>
       </CommentsList>
-      {user && <NewCommentForm setComments={setComments} />}
+      {user && (
+        <NewCommentForm setComments={setComments} review_id={review_id} />
+      )}
     </section>
-  ) : (
-    children
   );
 };
 

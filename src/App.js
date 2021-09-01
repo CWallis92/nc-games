@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useState } from "react";
 
 import { Nav, Homepage, ReviewsList, ReviewPage } from "./Components";
-import "./App.css";
+import "./styles/App.css";
 import { UserContext } from "./contexts/user";
 
 function App() {
@@ -16,24 +16,20 @@ function App() {
   return (
     <Router>
       <UserContext.Provider value={{ user, setUser }}>
-        <div className="App">
-          <Nav></Nav>
-          <main>
-            <Switch>
-              <Route exact path="/">
-                <Homepage />
-              </Route>
-              <Route exact path="/reviews/:category?">
-                <ReviewsList />
-              </Route>
-              <Route path="/reviews/review/:review_id">
-                <ReviewPage>
-                  <p>Review not found!</p>
-                </ReviewPage>
-              </Route>
-            </Switch>
-          </main>
-        </div>
+        <Nav></Nav>
+        <main>
+          <Switch>
+            <Route exact path="/">
+              <Homepage />
+            </Route>
+            <Route exact path="/reviews/:category?">
+              <ReviewsList />
+            </Route>
+            <Route path="/reviews/review/:review_id">
+              <ReviewPage />
+            </Route>
+          </Switch>
+        </main>
       </UserContext.Provider>
     </Router>
   );

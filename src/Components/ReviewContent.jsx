@@ -1,41 +1,17 @@
-import * as axios from "axios";
-import { useState } from "react";
-import { useHistory, useParams } from "react-router";
+import { useHistory } from "react-router";
 
-const ReviewContent = ({ review, setReview }) => {
+import { useReview } from "../hooks";
+
+const ReviewContent = ({ review_id, children }) => {
+  const { review, voteError, updateVotes } = useReview(review_id);
+
   let history = useHistory();
-  const { review_id } = useParams();
 
   const changeCategory = () => {
     history.push("/reviews/" + review.category);
   };
 
-  const [voteError, setVoteError] = useState(null);
-
-  const endpoint = axios.create({
-    baseURL: "https://chris-nc-games.herokuapp.com/api",
-    timeout: 1000,
-  });
-
-  const updateVotes = (amount) => {
-    setVoteError(null);
-
-    setReview((currReview) => {
-      const newReview = { ...currReview };
-      newReview.votes += amount;
-      return newReview;
-    });
-
-    endpoint
-      .patch(`/reviews/${review_id}`, {
-        inc_votes: amount,
-      })
-      .catch((err) => {
-        setVoteError("Sorry, we've encountered an issue. Try again later!");
-      });
-  };
-
-  return (
+  return review ? (
     <section>
       <div className="reviewBox">
         <img src={review.review_img_url} alt={review.title} />
@@ -72,6 +48,8 @@ const ReviewContent = ({ review, setReview }) => {
         <p>{review.review_body}</p>
       </div>
     </section>
+  ) : (
+    children
   );
 };
 
