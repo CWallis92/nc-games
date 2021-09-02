@@ -1,7 +1,7 @@
 import { useHistory } from "react-router";
 import { useCategories } from "../hooks";
 
-const ReviewsFilter = () => {
+const ReviewsFilter = ({ setSort }) => {
   let history = useHistory();
 
   const changeCategory = (category) => {
@@ -10,19 +10,28 @@ const ReviewsFilter = () => {
 
   const categories = useCategories();
 
+  const updateSort = () => {
+    setSort("a-z");
+  };
+
   return (
     <div id="reviewsFilter">
-      {categories.map((category) => {
-        return (
-          <button
-            key={category.slug}
-            onClick={() => changeCategory(category.slug)}
-          >
-            {category.slug}
-          </button>
-        );
-      })}
-      <button onClick={() => changeCategory()}>Clear</button>
+      <div id="categories">
+        {categories.map((category) => {
+          return (
+            <button
+              key={category.slug}
+              onClick={() => changeCategory(category.slug)}
+            >
+              {category.slug}
+            </button>
+          );
+        })}
+        <button onClick={() => changeCategory()}>Clear</button>
+      </div>
+      <div id="sort">
+        <button onClick={updateSort}>Sort?</button>
+      </div>
     </div>
   );
 };

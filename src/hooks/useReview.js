@@ -7,7 +7,10 @@ const useReview = (review_id) => {
   const [voteError, setVoteError] = useState(null);
 
   useEffect(() => {
-    getReview(review_id).then((response) => setReview(response.data.review));
+    getReview(review_id).then(({ data: { review } }) => {
+      console.log(typeof review);
+      setReview(review);
+    });
   }, []);
 
   const updateVotes = (amount) => {

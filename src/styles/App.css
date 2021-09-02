@@ -49,6 +49,16 @@ main {
   background: lightgray;
   border-radius: 5px;
   border: 1px solid gray;
+  display: flex;
+  padding: 0.5em;
+}
+
+#categories {
+  max-width: 80%;
+}
+
+#sort {
+  margin-left: auto;
 }
 
 .reviewBox {

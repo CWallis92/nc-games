@@ -11,7 +11,7 @@ const useReviews = (category) => {
     setIsLoading(false);
   }, [category]);
 
-  return { reviews, isLoading };
+  return { reviews, setReviews, isLoading };
 };
 
 export default useReviews;
